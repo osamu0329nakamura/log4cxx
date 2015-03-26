@@ -69,6 +69,11 @@ add_library(log4cxx SHARED
     ${log4cxx_source}
 )
 
+set_target_properties(log4cxx
+    PROPERTIES
+        VERSION "${PROJECT_VERSION}"
+        SOVERSION "${PROJECT_VERSION}"
+)
 target_include_directories(log4cxx
     PUBLIC
         /usr/include/apr-1
@@ -76,27 +81,17 @@ target_include_directories(log4cxx
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/main/include>
         $<INSTALL_INTERFACE:include>
 )
-
-set_target_properties(log4cxx
-    PROPERTIES
-        VERSION "${PROJECT_VERSION}"
-        SOVERSION "${PROJECT_VERSION}"
-    )
-
+target_link_libraries(log4cxx PUBLIC apr-1 aprutil-1)
 install(TARGETS log4cxx
     EXPORT log4cxx-export
     LIBRARY DESTINATION lib
 )
-
 install(EXPORT log4cxx-export
+    FILE log4cxx-config.cmake
     DESTINATION cmake)
 export(EXPORT log4cxx-export)
 
-install(DIRECTORY
-    ${PROJECT_BINARY_DIR}/log4cxx
-    DESTINATION include
-    COMPONENT devel
-)
+# install header files from source tree
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/main/include/log4cxx
     DESTINATION include
     COMPONENT devel
@@ -106,3 +101,10 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/main/include/log4cxx
     PATTERN ".*" EXCLUDE
     PATTERN "Makefile.am" EXCLUDE
 )
+# install generated header files from build tree
+install(DIRECTORY
+    ${PROJECT_BINARY_DIR}/log4cxx
+    DESTINATION include
+    COMPONENT devel
+)
+
