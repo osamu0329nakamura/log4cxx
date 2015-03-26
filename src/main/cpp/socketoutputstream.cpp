@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+#include <cstring>
 #include <log4cxx/logstring.h>
 #include <log4cxx/helpers/socketoutputstream.h>
 #include <log4cxx/helpers/socket.h>
@@ -49,7 +49,7 @@ void SocketOutputStream::write(ByteBuffer& buf, Pool& /* p */ ) {
   if (buf.remaining() > 0) {
     size_t sz = array.size();
     array.resize(sz + buf.remaining());
-    memcpy(&array[sz], buf.current(), buf.remaining());
+    std::memcpy(&array[sz], buf.current(), buf.remaining());
     buf.position(buf.limit());
   }
 }

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+#include <cstring>
 #include <log4cxx/logstring.h>
 #include <log4cxx/helpers/inputstreamreader.h>
 #include <log4cxx/helpers/exception.h>
@@ -63,7 +63,7 @@ LogString InputStreamReader::read(Pool& p) {
              throw IOException(stat);
          }
          if (buf.remaining() > 0) {
-             memmove(buf.data(), buf.current(), buf.remaining());
+             std::memmove(buf.data(), buf.current(), buf.remaining());
              buf.limit(buf.remaining());
          } else {
              buf.clear();
