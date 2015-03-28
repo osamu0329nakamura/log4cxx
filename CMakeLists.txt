@@ -11,7 +11,7 @@ set(enable-wchar_t  1       CACHE BOOL "enable wchar_t")
 set(with-logchar    utf-8   CACHE STRING "type for logchar. Accepted TYPE variants: auto, utf-8,\n"
                                   "wchar_t, unichar (default=utf-8)")
 set(with-charset    auto    CACHE STRING "locale charset Accepted TYPE variants: auto, utf-8,\n"
-                                  "wchar_t, unichar (default=auto)")
+                                  "iso-8859-1, usascii, ebcdic (default=auto)")
 set(with-ODBC       NO      CACHE STRING "ODBC support. Accepted arguments: unixODBC, iODBC,\n"
                                          "Microsoft, NO (default=NO)")
 set(with-SMTP       NO      CACHE STRING "SMTP support, Accepted arguments: libesmtp, NO\n"
