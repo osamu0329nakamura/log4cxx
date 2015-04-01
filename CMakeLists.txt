@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.8.12)
 
-project(log4cxx VERSION 0.10.0 LANGUAGES C CXX)
+project(log4cxx C CXX)
+set(PROJECT_VERSION 0.10.0)
 include(CheckFunctionExists)
 include(CheckIncludeFile)
 
@@ -89,7 +90,8 @@ install(TARGETS log4cxx
 install(EXPORT log4cxx-export
     FILE log4cxx-config.cmake
     DESTINATION cmake)
-export(EXPORT log4cxx-export)
+export(TARGETS log4cxx
+    FILE log4cxx-export.cmake)
 
 # install header files from source tree
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/main/include/log4cxx
